@@ -1,45 +1,51 @@
-// Lấy các tham số từ URL
-function getParams() {
-  const params = {};
-  const searchParams = new URLSearchParams(window.location.search);
-  for (const [key, value] of searchParams) {
-    params[key] = value;
-  }
-  return params;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dữ liệu từ URL</title>
+</head>
+<body>
+  <table id="data-table" border="1">
+    <tr>
+      <th>Số ĐH</th>
+      <th>Tên SP</th>
+    </tr>
+  </table>
 
-// Hiển thị dữ liệu trong bảng HTML
-function displayData() {
-  const params = getParams();
-  const table = document.createElement('table');
-  const headerRow = table.insertRow();
-  const header1 = headerRow.insertCell(0);
-  const header2 = headerRow.insertCell(1);
-  header1.textContent = 'Số ĐH';
-  header2.textContent = 'Tên SP';
+  <script>
+    function getParams() {
+      const params = {};
+      const searchParams = new URLSearchParams(window.location.search);
+      for (const [key, value] of searchParams) {
+        params[key] = value;
+      }
+      return params;
+    }
 
-  // Dữ liệu mẫu, bạn có thể thay thế bằng dữ liệu từ URL
-  const data = [
-    { soDH: 'DH001', tenSP: 'Sản phẩm 1' },
-    { soDH: 'DH002', tenSP: 'Sản phẩm 2' },
-    { soDH: 'DH003', tenSP: 'Sản phẩm 3' },
-  ];
+    function displayData() {
+      const params = getParams();
+      const table = document.getElementById('data-table');
 
-  if (params.soDH && params.tenSP) {
-    // Nếu có dữ liệu từ URL, thêm vào mảng dữ liệu
-    data.push({ soDH: params.soDH, tenSP: params.tenSP });
-  }
+      const data = [
+        { soDH: 'DH001', tenSP: 'Sản phẩm 1' },
+        { soDH: 'DH002', tenSP: 'Sản phẩm 2' },
+        { soDH: 'DH003', tenSP: 'Sản phẩm 3' },
+      ];
 
-  data.forEach(item => {
-    const row = table.insertRow();
-    const cell1 = row.insertCell(0);
-    const cell2 = row.insertCell(1);
-    cell1.textContent = item.soDH;
-    cell2.textContent = item.tenSP;
-  });
+      if (params.soDH && params.tenSP) {
+        data.push({ soDH: params.soDH, tenSP: params.tenSP });
+      }
 
-  document.body.appendChild(table);
-}
+      data.forEach(item => {
+        const row = table.insertRow();
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        cell1.textContent = item.soDH;
+        cell2.textContent = item.tenSP;
+      });
+    }
 
-// Gọi hàm để hiển thị dữ liệu khi trang được tải
-displayData();
+    displayData();
+  </script>
+</body>
+</html>
