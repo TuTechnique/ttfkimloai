@@ -94,7 +94,7 @@
             const pastDaysOfYear = (now - startOfYear + 86400000) / 86400000;
             const weekNumber = Math.ceil(pastDaysOfYear / 7);
 
-            document.getElementById('date').textContent = `${dayName}, Ngày ${day}/${month}/${year}, Tuần ${weekNumber}`;
+            document.getElementById('date').textContent = `${dayName}, ${day}/${month}/${year}, Tuần ${weekNumber}`;
         }
 
         let focusInterval;
