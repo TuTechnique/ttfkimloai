@@ -1,51 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Dữ liệu từ URL</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock Widget</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        #clock {
+            font-size: 48px;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-  <table id="data-table" border="1">
-    <tr>
-      <th>Số ĐH</th>
-      <th>Tên SP</th>
-    </tr>
-  </table>
+    <div id="clock"></div>
 
-  <script>
-    function getParams() {
-      const params = {};
-      const searchParams = new URLSearchParams(window.location.search);
-      for (const [key, value] of searchParams) {
-        params[key] = value;
-      }
-      return params;
-    }
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
 
-    function displayData() {
-      const params = getParams();
-      const table = document.getElementById('data-table');
-
-      const data = [
-        { soDH: 'DH001', tenSP: 'Sản phẩm 1' },
-        { soDH: 'DH002', tenSP: 'Sản phẩm 2' },
-        { soDH: 'DH003', tenSP: 'Sản phẩm 3' },
-      ];
-
-      if (params.soDH && params.tenSP) {
-        data.push({ soDH: params.soDH, tenSP: params.tenSP });
-      }
-
-      data.forEach(item => {
-        const row = table.insertRow();
-        const cell1 = row.insertCell(0);
-        const cell2 = row.insertCell(1);
-        cell1.textContent = item.soDH;
-        cell2.textContent = item.tenSP;
-      });
-    }
-
-    displayData();
-  </script>
+        setInterval(updateClock, 1000);
+        updateClock(); // Initialize clock on load
+    </script>
 </body>
 </html>
