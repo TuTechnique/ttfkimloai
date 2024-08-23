@@ -13,21 +13,21 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: transparent;
+            background-color: black;
             color: white;
             height: 100vh;
             box-sizing: border-box;
         }
 
         #time {
-            font-size: 64px;
+            font-size: 60px;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         #date {
-            font-size: 24px;
-            margin-bottom: 30px;
+            font-size: 18px;
+            margin-bottom: 10px;
         }
 
         #focus-container {
@@ -35,8 +35,8 @@
         }
 
         #focus-timer {
-            font-size: 48px;
-            margin-bottom: 20px;
+            font-size: 40px;
+            margin-bottom: 10px;
         }
 
         #focus-controls {
@@ -49,8 +49,8 @@
             background-color: #61dafb;
             color: #282c34;
             border: none;
-            padding: 10px 20px;
-            font-size: 18px;
+            padding: 10px 15px;
+            font-size: 14px;
             cursor: pointer;
             border-radius: 5px;
             transition: background-color 0.3s ease;
@@ -68,9 +68,9 @@
     <div id="focus-container">
         <div id="focus-timer">00:00</div>
         <div id="focus-controls">
-            <button class="timer-button" onclick="startFocusTimer(15)">15 Phút</button>
-            <button class="timer-button" onclick="startFocusTimer(30)">30 Phút</button>
-            <button class="timer-button" onclick="startFocusTimer(60)">60 Phút</button>
+            <button class="timer-button" onclick="startFocusTimer(15)">15'</button>
+            <button class="timer-button" onclick="startFocusTimer(30)">30'</button>
+            <button class="timer-button" onclick="startFocusTimer(60)">60'</button>
         </div>
     </div>
 
@@ -84,7 +84,7 @@
 
         function updateDate() {
             const now = new Date();
-            const days = ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy'];
+            const days = ['CN', 'Th2', 'Th3', 'Th4', 'Th5', 'Th6', 'Th7'];
             const dayName = days[now.getDay()];
             const day = String(now.getDate()).padStart(2, '0');
             const month = String(now.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
@@ -94,7 +94,7 @@
             const pastDaysOfYear = (now - startOfYear + 86400000) / 86400000;
             const weekNumber = Math.ceil(pastDaysOfYear / 7);
 
-            document.getElementById('date').textContent = `${dayName}, ${day}/${month}/${year}, Tuần ${weekNumber}`;
+            document.getElementById('date').textContent = `${dayName}, ${day}/${month}/${year}, w${weekNumber}`;
         }
 
         let focusInterval;
